@@ -20,6 +20,7 @@ namespace DemoConsoleApp31
             await Case1.Show(configuration);
             await Case2.Show(configuration);
             await Case3.Show(configuration);
+            await Case4.Show(configuration);
 
             await CorrectCase.Show(configuration);
         }

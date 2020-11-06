@@ -24,6 +24,7 @@ namespace Utils
         public static void End()
         {
             Console.WriteLine("#####################################################");
+            Console.ReadKey();
         }
     }
 }

@@ -10,15 +10,15 @@ namespace DemoConsoleApp21.Cases
     {
         public static async Task Show(IConfiguration configuration)
         {
-            UiHelper.Header("Case 1: Ignore include:");
+            UiHelper.Header("Case 1: [not reproduced] Ignore include:");
 
             using var context = new IncorrectContext(configuration);
             
-            var items = await context.Profiles
+            var profiles = await context.Profiles
                 .Include(p => p.User)
                 .ToArrayAsync();
 
-            UiHelper.Print("Loaded profiles :", items);
+            UiHelper.Print("Loaded profiles :", profiles);
 
             UiHelper.End();
         }

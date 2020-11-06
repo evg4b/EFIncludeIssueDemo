@@ -1,5 +1,4 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Threading.Tasks;
 using Dotnet21.IncorrectContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
@@ -7,26 +6,20 @@ using Utils;
 
 namespace DemoConsoleApp21.Cases
 {
-    internal static partial class Case3
+    internal static class Case3
     {
         public static async Task Show(IConfiguration configuration)
         {
-            UiHelper.Header("Query with preloaded users 3 and 5");
-
+            UiHelper.Header("Case 3: [not reproduced] Query with AsNoTracking:");
+            
             using var context = new IncorrectContext(configuration);
             
-            var userIds = new[] {3, 5};
-            var preloadedUsers = await context.Users
-                .Where(p => userIds.Contains(p.Id))
-                .ToListAsync();
-
-            UiHelper.Print("Preloaded users 3 and 5:", preloadedUsers);
-            
-            var items = await context.Profiles
+            var profiles = await context.Profiles
                 .Include(p => p.User)
+                .AsNoTracking()
                 .ToArrayAsync();
             
-            UiHelper.Print("Loaded users:", items);
+            UiHelper.Print("Profiles loaded:", profiles);
             
             UiHelper.End();
         }
