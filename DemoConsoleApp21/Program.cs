@@ -1,11 +1,11 @@
 ﻿using System.Threading.Tasks;
-using DemoConsoleApp31.Cases;
-using Dotnet31.CorrectContext;
-using Dotnet31.IncorrectContext;
+using DemoConsoleApp21.Cases;
+using Dotnet21.CorrectContext;
+using Dotnet21.IncorrectContext;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 
-namespace DemoConsoleApp31
+namespace DemoConsoleApp21
 {
     internal static class Program
     {
@@ -27,10 +27,10 @@ namespace DemoConsoleApp31
 
         private static async Task Migrate(IConfiguration configuration)
         {
-            await using var incorrectContext = new IncorrectContext(configuration);
+            using var incorrectContext = new IncorrectContext(configuration);
             await incorrectContext.Database.MigrateAsync();
-
-            await using var correctContext = new CorrectContext(configuration);
+            
+            using var correctContext = new CorrectContext(configuration);
             await correctContext.Database.MigrateAsync();
         }
     }
